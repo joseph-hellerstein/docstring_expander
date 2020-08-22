@@ -15,7 +15,7 @@ To illustrate, consider the following two functions intended as a high level plo
      num_row: Number of rows of plots
      bins: Number of bins
      """`
-  
+     
 `def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
      """
      Plot a histogram.
