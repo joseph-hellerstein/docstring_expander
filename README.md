@@ -5,16 +5,42 @@ But it creates a problem when used with intellisense in that the keyword options
 
 To illustrate, consider the following two functions intended as a high level plotting interface:
 
-``def plotHist(data, num_col=2, num_row=3, bins=100):``
+`def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100):
+     """
+     Plot a histogram.
+     
+     Parameters
+     ----------
+     num_col: Number of columns of plots
+     num_row: Number of rows of plots
+     bins: Number of bins
+     """`
   
-``def plotTimeseries(data, num_col-2, num_row=3):``
+`def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
+     """
+     Plot a histogram.
+     
+     Parameters
+     ----------
+     num_col: Number of columns of plots
+     num_row: Number of rows of plots
+     """`
+`
 
 Both of these functions call:
 
-``def genPlot(data, num_col=2, num_row=3, bins=100):``
+``def genPlot(data, num_col:int=2, num_row:int=3, bins:int=100):``
 
 Since there are an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. Further these should be transparently available to ``hist`` and ``timeseries``. So, a more maintainable version of these functions would be:
 ``def plotHist(data, **kwargs):`` and ``def plotTimeseries(data, **kwargs):``.
 However, this raises a secondary issue with intellisense since the options exposed are only those in the docstring of the function called. One solution is to repeat these options in each docstring, but this increases the maintenance burden.
 
-`docstring-expander` provides another solution.
+`docstring-expander` provides another solution. Suppose we have the following dictionary that describes all keyword arguments to `genPlot`:
+`kwargs = {
+    'num_col': ('Number of columns of plots', 2),
+    'num_row': ('Number of rows of plots', 3),
+    'bins': ('Number of bins', 100),
+    }`
+    
+  
+
