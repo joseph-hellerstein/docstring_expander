@@ -5,8 +5,8 @@ But it creates a problem when used with intellisense in that the keyword options
 
 To illustrate, consider the following two functions intended as a high level plotting interface:
 
-`def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100):
-     """
+`def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100):`
+     `"""
      Plot a histogram.
      
      Parameters
