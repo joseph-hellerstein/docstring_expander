@@ -69,9 +69,9 @@ Since there is an almost unlimited number of options for plotting, we expect tha
         """
         ...
     
-However, this raises a secondary issue with intellisense since the options exposed for a function by intellisese are what's in the function's docstring.
+However, this raises a secondary issue with intellisense since the options exposed for a function by intellisese are what's in the docstring of function. We could painfully repeat this information for each function, but this quickly becomes a maintenance nightmare.
 
-`kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments to `genPlot`:
+`kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
 
     kwargs = {
         'num_col': ('Number of columns of plots', 2),
