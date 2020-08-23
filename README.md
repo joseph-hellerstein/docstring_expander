@@ -74,9 +74,9 @@ However, this raises a secondary issue with intellisense since the options expos
 `kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
 
     kwargs = {
-        'num_col': ('Number of columns of plots', 2),
-        'num_row': ('Number of rows of plots', 3),
-        'bins': ('Number of bins', 100),
+        'num_col': (int, 2, 'Number of columns of plots'),
+        'num_row': (int, 3, 'Number of rows of plots'),
+        'bins': (int, 100, 'Number of bins'),
         }
  Of these, we define a few keyword arguments as common to most plotting functions.
  
@@ -85,28 +85,37 @@ However, this raises a secondary issue with intellisense since the options expos
 Then we can write:
 
     @kwargs(kwargs, include=['bins'])
-    def plotHist(data):
+    def plotHist(data:np.ndarray):
         """
         Plot a histogram.
      
         Parameters
         ----------
-        #@expand
+        #@kwmgr: expand
         """
         ...
      
     @expand(base=base)
-    def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
+    def plotTimeseries(data:np.ndarray):
         """
         Plot a histogram.
      
         Parameters
         ----------
-        #@expand
+        #@kwmgr: exapnd
         """
         ...
     
 
-This replaces `#@expand` in `plotHist` with:
+For `plotHist`, the decorator does the following:
+- Changes the function definition to `plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100)`
+- Replaces `#@kwmgr: expand with:
+
+        num_col: Number of columns of plots
+            default: 2
+        num_row: Number of rows of plots
+            default: 3
+        bins: Number of bins
+            default: 100
    
    
