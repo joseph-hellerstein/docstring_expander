@@ -84,7 +84,7 @@ There are two problems with this solution. First, intellisense doesn't work sinc
     
 Then we can write:
 
-    @kwargs(kwargs, base, include=['bins'])
+    @kwargs(kwargs, base, includes=['bins'])
     def plotHist(data:np.ndarray):
         """
         Plot a histogram.
