@@ -84,7 +84,9 @@ There are two problems with this solution. First, intellisense doesn't work sinc
     
 Then we can write:
 
-    @kwargs(kwargs, base, includes=['bins'])
+    import kwmgr
+    
+    @kwmgr.kwargs(kwargs, base, includes=['bins'])
     def plotHist(data:np.ndarray):
         """
         Plot a histogram.
@@ -95,7 +97,7 @@ Then we can write:
         """
         ...
      
-    @kwargs(kwargs, base)
+    @kwmgr.kwargs(kwargs, base)
     def plotTimeseries(data:np.ndarray):
         """
         Plot a histogram.
