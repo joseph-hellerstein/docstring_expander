@@ -18,7 +18,7 @@ To illustrate, consider the following low level plotting function that is called
         """
         ...
     
-    def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100): 
+    def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins=100): 
         """
         Plot a histogram.
      
