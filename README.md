@@ -1,10 +1,23 @@
-# Keyword Argument Manager
+# Docstring Expander
 
 This project addresses a common problem with the development of python packages in which there several higher level functions that have are many keyword options that are processed by low level functions. Typically, the higher level functions use `**kwargs` to pass keywords transparently to the lower level functions. This is an excellent use of python's capabilities.
 But it creates a problem when used with intellisense in that the keyword options are only exposed at the lower level.
 
-To illustrate, consider the following two functions intended as a high level plotting interface:
+To illustrate, consider the following low level plotting function that is called by two plotting functions.
 
+    
+    def lowlevelPlot(data, num_col:int=2, num_row:int=3, bins=100):
+        """
+        General plot function.
+     
+        Parameters
+        ----------
+        num_col: Number of columns of plots
+        num_row: Number of rows of plots
+        bins: Number of bins
+        """
+        ...
+    
     def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100): 
         """
         Plot a histogram.
@@ -19,6 +32,7 @@ To illustrate, consider the following two functions intended as a high level plo
             default: 100
         """
         ...
+        lowlevelPlot(num_col=num_col, num_row=num_row, bins=bins)
      
      def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
          """
@@ -31,21 +45,8 @@ To illustrate, consider the following two functions intended as a high level plo
          num_row: Number of rows of plots
          """
          ...
+         lowlevelPlot(num_col=num_col, num_row=num_row)
 `
-
-Both of these functions call:
-
-    def genPlot(data, num_col:int=2, num_row:int=3, bins:int=100):
-        """
-        General plot function.
-     
-        Parameters
-        ----------
-        num_col: Number of columns of plots
-        num_row: Number of rows of plots
-        bins: Number of bins
-        """
-        ...
 
 Since there is an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. For example, we may want to add options for a title, the position of the title, and its font. These should be transparently available to `hist` and `timeseries`, without changing their signatures or docstrings. So, a more maintainable version of these functions is:
 
@@ -55,9 +56,10 @@ Since there is an almost unlimited number of options for plotting, we expect tha
      
         Parameters
         ----------
-        See genPlot.
+        See lowlevelPlot.
         """
         ...
+        lowlevelPlot(**kwargs)
         
     def plotTimeseries(data:np.ndarray, **kwargs):
         """
@@ -65,20 +67,21 @@ Since there is an almost unlimited number of options for plotting, we expect tha
      
         Parameters
         ----------
-        See genPlot.
+        See lowlevelPlot.
         """
         ...
+        lowlevelPlot(**kwargs)
     
-There are two problems with this solution. First, intellisense doesn't work since the options exposed for a function by intellisese are what's in the docstring of function. Second, there is no checking for invalid (or misspelled) keyword names.
+But now intellisense doesn't work since the options exposed for a function by intellisese are what's in the docstring of function.
 
-`kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
+`docstring_expander` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
 
-    import kwmgr
+    import docstring_expander as de
     
     kwargs = [
-        kwmgr.Kwarg('num_col', dtype=int, default=2, doc='Number of columns of plots'),
-        kwmgr.Kwarg('num_row', dtype=int, default=3, doc='Number of rows of plots'),
-        kwmgr.Kwarg(name='bins' dtype=int, default=100, doc='Number of bins'),
+        de.Kwarg('num_col', dtype=int, default=2, doc='Number of columns of plots'),
+        de.Kwarg('num_row', dtype=int, default=3, doc='Number of rows of plots'),
+        de.Kwarg(name='bins' default=100, doc='Number of bins'),
         ]
  Of these, we define a few keyword arguments as common to most plotting functions.
  
@@ -86,7 +89,7 @@ There are two problems with this solution. First, intellisense doesn't work sinc
     
 Then we can write:
     
-    @kwmgr.kwargs(kwargs, base, includes=['bins'])
+    @de.kwargs(kwargs, base, includes=['bins'])
     def plotHist(data:np.ndarray):
         """
         Plot a histogram.
@@ -96,8 +99,9 @@ Then we can write:
         #@kwmgr: expand
         """
         ...
+        lowlevelPlot(**kwargs)
      
-    @kwmgr.kwargs(kwargs, base)
+    @de.kwargs(kwargs, base)
     def plotTimeseries(data:np.ndarray):
         """
         Plot a histogram.
@@ -107,17 +111,17 @@ Then we can write:
         #@kwmgr: exapnd
         """
         ...
+        lowlevelPlot(**kwargs)
     
 
-For `plotHist`, the decorator does the following:
-- Changes the function definition to `plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100)`
-- Replaces `#@kwmgr: expand` with:
+For `plotHist`, the decorator replaces `#@kwmgr: expand` with:
 
-        num_col: Number of columns of plots
+        num_col: int
+            Number of columns of plots
             default: 2
-        num_row: Number of rows of plots
+        num_row: int
+            Number of rows of plots
             default: 3
-        bins: Number of bins
+        bins: 
+            Number of bins
             default: 100
-   
-In general, the keywords used in the signature are specified by the arguments of `@kwarg`: those in `base` plus those in `includes` minus those in `excludes`.
