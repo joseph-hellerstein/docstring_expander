@@ -5,16 +5,16 @@ But it creates a problem when used with intellisense in that the keyword options
 
 To illustrate, consider the following two functions intended as a high level plotting interface:
 
-`def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100):`
-     `"""
-     Plot a histogram.
+    def plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100): 
+        """
+        Plot a histogram.
      
-     Parameters
-     ----------
-     num_col: Number of columns of plots
-     num_row: Number of rows of plots
-     bins: Number of bins
-     """`
+        Parameters
+        ----------
+        num_col: Number of columns of plots
+        num_row: Number of rows of plots
+        bins: Number of bins
+        """
      
 `def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
      """
