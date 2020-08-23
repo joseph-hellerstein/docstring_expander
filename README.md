@@ -109,7 +109,7 @@ Then we can write:
 
 For `plotHist`, the decorator does the following:
 - Changes the function definition to `plotHist(data:np.ndarray, num_col:int=2, num_row:int=3, bins:int=100)`
-- Replaces `#@kwmgr: expand with:
+- Replaces `#@kwmgr: expand` with:
 
         num_col: Number of columns of plots
             default: 2
