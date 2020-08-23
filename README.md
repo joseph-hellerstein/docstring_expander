@@ -69,7 +69,7 @@ Since there is an almost unlimited number of options for plotting, we expect tha
         """
         ...
     
-However, this raises a secondary issue with intellisense since the options exposed for a function by intellisese are what's in the docstring of function. We could painfully repeat this information for each function, but this quickly becomes a maintenance nightmare.
+There are two problems with this solution. First, intellisense doesn't work since the options exposed for a function by intellisese are what's in the docstring of function. Second, there is no checking for invalid (or misspelled) keyword names.
 
 `kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
 
