@@ -47,7 +47,7 @@ Both of these functions call:
         """
         ...
 
-Since there are an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. Further these should be transparently available to ``hist`` and ``timeseries``. So, a more maintainable version of these functions would be:
+Since there is an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. For example, we may want to add options for a title, the position of the title, and its font. These should be transparently available to `hist` and `timeseries`, without changing their signatures or docstring. So, a more maintainable version of these functions is be:
 
     def plotHist(data, **kwargs):
         """
