@@ -118,4 +118,4 @@ For `plotHist`, the decorator does the following:
         bins: Number of bins
             default: 100
    
-The keywords used in the signature are specified by the arguments of `@kwarg`: those in `base` plus those in `includes` minus those in `excludes`.
+In general, the keywords used in the signature are specified by the arguments of `@kwarg`: those in `base` plus those in `includes` minus those in `excludes`.
