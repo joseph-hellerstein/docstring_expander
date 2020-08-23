@@ -73,6 +73,8 @@ There are two problems with this solution. First, intellisense doesn't work sinc
 
 `kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
 
+    import kwmgr
+    
     kwargs = [
         kwmgr.Kwarg('num_col', dtype=int, default=2, doc='Number of columns of plots'),
         kwmgr.Kwarg('num_row', dtype=int, default=3, doc='Number of rows of plots'),
@@ -83,8 +85,6 @@ There are two problems with this solution. First, intellisense doesn't work sinc
     base = ['num_col', 'num_row']
     
 Then we can write:
-
-    import kwmgr
     
     @kwmgr.kwargs(kwargs, base, includes=['bins'])
     def plotHist(data:np.ndarray):
