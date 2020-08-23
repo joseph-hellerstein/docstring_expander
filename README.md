@@ -1,6 +1,6 @@
 # Keyword Argument Manager
 
-This project addresses a common problem with the development of python packages in which there several higher level functions that have are many keyword options that are processed by low level functions. Typically, the higher level functions use `**kwargs`` to pass keywords transparently to the lower level functions. This is an excellent use of python's capabilities.
+This project addresses a common problem with the development of python packages in which there several higher level functions that have are many keyword options that are processed by low level functions. Typically, the higher level functions use `**kwargs` to pass keywords transparently to the lower level functions. This is an excellent use of python's capabilities.
 But it creates a problem when used with intellisense in that the keyword options are only exposed at the lower level.
 
 To illustrate, consider the following two functions intended as a high level plotting interface:
