@@ -96,7 +96,7 @@ Then we can write:
      
         Parameters
         ----------
-        #@kwmgr: expand
+        #@expand
         """
         ...
         lowlevelPlot(**kwargs)
@@ -108,13 +108,13 @@ Then we can write:
      
         Parameters
         ----------
-        #@kwmgr: exapnd
+        #@exapnd
         """
         ...
         lowlevelPlot(**kwargs)
     
 
-For `plotHist`, the decorator replaces `#@kwmgr: expand` with:
+For `plotHist`, the decorator replaces `#@expand` with:
 
         num_col: int
             Number of columns of plots
