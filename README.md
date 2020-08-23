@@ -69,15 +69,17 @@ Since there are an almost unlimited number of options for plotting, we expect th
         """
         ...
     
-However, this raises a secondary issue with intellisense since the options exposed are only those in the docstring of the function called. One solution is to repeat these options in each docstring, but this increases the maintenance burden.
+However, this raises a secondary issue with intellisense since the options exposed are only those in the docstring of the function called.
 
-`docstring-expander` provides another solution. Suppose we have the following dictionary that describes all keyword arguments to `genPlot`:
+`kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments to `genPlot`:
 
     kwargs = {
         'num_col': ('Number of columns of plots', 2),
         'num_row': ('Number of rows of plots', 3),
         'bins': ('Number of bins', 100),
         }
+ Of these, we define a few keyword arguments as common to most plotting functions.
+ 
     base = ['num_col', 'num_row']
     
 Then we can write:
