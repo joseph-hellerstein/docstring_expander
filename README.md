@@ -47,7 +47,7 @@ Both of these functions call:
         """
         ...
 
-Since there is an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. For example, we may want to add options for a title, the position of the title, and its font. These should be transparently available to `hist` and `timeseries`, without changing their signatures or docstrings. So, a more maintainable version of these functions is be:
+Since there is an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. For example, we may want to add options for a title, the position of the title, and its font. These should be transparently available to `hist` and `timeseries`, without changing their signatures or docstrings. So, a more maintainable version of these functions is:
 
     def plotHist(data, **kwargs):
         """
@@ -69,7 +69,7 @@ Since there is an almost unlimited number of options for plotting, we expect tha
         """
         ...
     
-However, this raises a secondary issue with intellisense since the options exposed are only those in the docstring of the function called.
+However, this raises a secondary issue with intellisense since the options exposed for a function by intellisese are what's in the function's docstring.
 
 `kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments to `genPlot`:
 
