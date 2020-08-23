@@ -15,21 +15,33 @@ To illustrate, consider the following two functions intended as a high level plo
         num_row: Number of rows of plots
         bins: Number of bins
         """
+        ...
      
-`def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
-     """
-     Plot a histogram.
+     def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
+         """
+         Plot a histogram.
      
-     Parameters
-     ----------
-     num_col: Number of columns of plots
-     num_row: Number of rows of plots
-     """`
+         Parameters
+         ----------
+         num_col: Number of columns of plots
+         num_row: Number of rows of plots
+         """
+         ...
 `
 
 Both of these functions call:
 
-``def genPlot(data, num_col:int=2, num_row:int=3, bins:int=100):``
+    def genPlot(data, num_col:int=2, num_row:int=3, bins:int=100):
+        """
+        General plot function.
+     
+        Parameters
+        ----------
+        num_col: Number of columns of plots
+        num_row: Number of rows of plots
+        bins: Number of bins
+        """
+        ...
 
 Since there are an almost unlimited number of options for plotting, we expect that the keyword options for ``genPlot`` will grow over time. Further these should be transparently available to ``hist`` and ``timeseries``. So, a more maintainable version of these functions would be:
 ``def plotHist(data, **kwargs):`` and ``def plotTimeseries(data, **kwargs):``.
