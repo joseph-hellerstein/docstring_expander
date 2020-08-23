@@ -59,7 +59,7 @@ Since there are an almost unlimited number of options for plotting, we expect th
         """
         ...
         
-    def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
+    def plotTimeseries(data:np.ndarray, **kwargs):
         """
         Plot a histogram.
      
