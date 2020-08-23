@@ -73,11 +73,11 @@ There are two problems with this solution. First, intellisense doesn't work sinc
 
 `kwmgr` provides another solution. Suppose we have the following dictionary that describes all keyword arguments for `genPlot`:
 
-    kwargs = {
-        'num_col': (int, 2, 'Number of columns of plots'),
-        'num_row': (int, 3, 'Number of rows of plots'),
-        'bins': (int, 100, 'Number of bins'),
-        }
+    kwargs = [
+        kwmgr.Kwarg('num_col', dtype=int, default=2, doc='Number of columns of plots'),
+        kwmgr.Kwarg('num_row', dtype=int, default=3, doc='Number of rows of plots'),
+        kwmgr.Kwarg(name='bins' dtype=int, default=100, doc='Number of bins'),
+        ]
  Of these, we define a few keyword arguments as common to most plotting functions.
  
     base = ['num_col', 'num_row']
