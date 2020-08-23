@@ -12,8 +12,11 @@ To illustrate, consider the following two functions intended as a high level plo
         Parameters
         ----------
         num_col: Number of columns of plots
+            default: 2
         num_row: Number of rows of plots
+            default: 3
         bins: Number of bins
+            default: 100
         """
         ...
      
@@ -24,6 +27,7 @@ To illustrate, consider the following two functions intended as a high level plo
          Parameters
          ----------
          num_col: Number of columns of plots
+            default: 2
          num_row: Number of rows of plots
          """
          ...
@@ -74,6 +78,33 @@ However, this raises a secondary issue with intellisense since the options expos
         'num_row': ('Number of rows of plots', 3),
         'bins': ('Number of bins', 100),
         }
+    base = ['num_col', 'num_row']
     
-  
+Then we can write:
 
+    @expand(base=base, include='bins')
+    def plotHist(data, **kwargs):
+        """
+        Plot a histogram.
+     
+        Parameters
+        ----------
+        #@expand
+        """
+        ...
+     
+    @expand(base=base)
+    def plotTimeseries(data:np.ndarray, num_col:int=2, num_row:int=3):
+        """
+        Plot a histogram.
+     
+        Parameters
+        ----------
+        #@expand
+        """
+        ...
+    
+
+This replaces `#@expand` in `plotHist` with:
+   
+   
