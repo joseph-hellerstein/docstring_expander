@@ -84,8 +84,8 @@ However, this raises a secondary issue with intellisense since the options expos
     
 Then we can write:
 
-    @expand(base=base, include='bins')
-    def plotHist(data, **kwargs):
+    @kwargs(kwargs, include=['bins'])
+    def plotHist(data):
         """
         Plot a histogram.
      
