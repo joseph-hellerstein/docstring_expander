@@ -84,7 +84,7 @@ There are two problems with this solution. First, intellisense doesn't work sinc
     
 Then we can write:
 
-    @kwargs(kwargs, include=['bins'])
+    @kwargs(kwargs, base, include=['bins'])
     def plotHist(data:np.ndarray):
         """
         Plot a histogram.
@@ -95,7 +95,7 @@ Then we can write:
         """
         ...
      
-    @expand(base=base)
+    @kwargs(kwargs, base)
     def plotTimeseries(data:np.ndarray):
         """
         Plot a histogram.
@@ -118,4 +118,4 @@ For `plotHist`, the decorator does the following:
         bins: Number of bins
             default: 100
    
-   
+The keywords used in the signature are specified by the arguments of `@kwarg`: those in `base` plus those in `includes` minus those in `excludes`.
