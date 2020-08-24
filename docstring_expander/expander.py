@@ -15,12 +15,23 @@ class Expander(object):
     self.includes = includes
     self.excludes = excludes
     self.keywords = set(base).difference(excludes)
-    self.keyworks = list(self.keywords.union(includes))
+    self.keywords = list(self.keywords.union(includes))
 
-  # TODO: finish
   def __call__(self, func):
-    pos = func.__doc__.index(cn.EXPAND)
+    string = func.__doc__
+    pos = string.index(cn.EXPAND)
     if pos < 0:
         return func
-    else:
-        # Find the indentation for the line
+    # Find the indentation for the line
+    indent = pos
+    for idx in range(1, pos):
+      if string[pos - idx] != " ":
+        indent = idx
+        break
+    # Construct the expansion
+    expansion = ''.join([str(k) k in self.keywords])
+    # Replace the docstring
+    func.__doc__ = string.replace(cn.EXPAND, expansion)
+    return func
+      
+    
