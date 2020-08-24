@@ -83,14 +83,14 @@ But now intellisense doesn't work since the options exposed for a function by in
         de.Kwarg('num_row', dtype=int, default=3, doc='Number of rows of plots'),
         de.Kwarg(name='bins' default=100, doc='Number of bins'),
         ]
- Of these, we define a few keyword arguments as common to most plotting functions.
+ We define a few keyword arguments as common to most plotting functions.
  
     base = ['num_col', 'num_row']
     
 Then we can write:
     
     @de.kwargs(kwargs, base, includes=['bins'])
-    def plotHist(data:np.ndarray):
+    def plotHist(data:np.ndarray, **kwargs):
         """
         Plot a histogram.
      
@@ -102,7 +102,7 @@ Then we can write:
         lowlevelPlot(**kwargs)
      
     @de.kwargs(kwargs, base)
-    def plotTimeseries(data:np.ndarray):
+    def plotTimeseries(data:np.ndarray, **kwargs):
         """
         Plot a histogram.
      
