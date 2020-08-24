@@ -1,4 +1,4 @@
-"""Defines a keyword argument."""
+"""Defines and validates a keyword argument."""
 
 
 ############# FUNCTIONS ############
@@ -20,15 +20,14 @@ class Kwarg(object):
     self.name = name  # Keyword
     self.default = default  # Default value of keyword
     self.doc = doc  # String to describe keyword
-    if dtype is None:
-      dtype = ""
-    else:
-      dtype = str(dtype)
     self.dtype = dtype  # Data type
     self._indent = None
 
   def setIndent(self, indent):
     self._indent = indent
+
+  def getIndentStr(self):
+    return ''.join([" " for _ in range(self._indent)])
 
   def __str__(self):
     """
@@ -38,10 +37,28 @@ class Kwarg(object):
     -------
     str
     """
-    indent_str = ''.join([" " for _ in range(self._indent)])
-    stg = "%s%s: %s\n" % (indent_str, self.name, _prune(self.dtype))
+    def render(string):
+      if string is None:
+        return ""
+      else:
+        return string
+    #
+    indent_str = self.getIndentStr()
+    stg = "%s%s: %s\n" % (indent_str, self.name, _prune(render(self.dtype)))
     if self.doc is not None:
-      stg += "%s    %s\n" % (indent_str, self.doc)
+      stg += "%s    %s\n" % (indent_str, render(self.doc))
     if self.default is not None: 
       stg += "%s    default = %s\n" % (indent_str, str(self.default))
     return stg
+
+  def validate(self, value:object):
+    """
+    Checks the type of value for the keyword argument.
+
+    Parameters
+    ----------
+    value: Checks type of value.   
+    """
+    if not isinstance(value, self.dtype):
+        raise ValueError("Got type %s, but should be type %s"
+            % (str(type(value)), str(type(self.dtype))))
