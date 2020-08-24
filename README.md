@@ -127,4 +127,4 @@ For `plotHist`, the decorator replaces `#@expand` with:
             default: 100
 
 
-The keyword arguments in the expansion are those in the base plus those in includes minus those in excludes.
+The keyword arguments in the expansion are those in `base` plus those in `includes` minus those in `excludes`.
