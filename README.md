@@ -89,7 +89,7 @@ But now intellisense doesn't work since the options exposed for a function by in
     
 Then we can write:
     
-    @de.kwargs(kwargs, base, includes=['bins'])
+    @de.expander(kwargs, base, includes=['bins'])
     def plotHist(data:np.ndarray, **kwargs):
         """
         Plot a histogram.
@@ -101,7 +101,7 @@ Then we can write:
         ...
         lowlevelPlot(**kwargs)
      
-    @de.kwargs(kwargs, base)
+    @de.expander(kwargs, base)
     def plotTimeseries(data:np.ndarray, **kwargs):
         """
         Plot a histogram.
