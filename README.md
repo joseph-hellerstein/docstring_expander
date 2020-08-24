@@ -125,3 +125,6 @@ For `plotHist`, the decorator replaces `#@expand` with:
         bins: 
             Number of bins
             default: 100
+
+
+The keyword arguments in the expansion are those in the base plus those in includes minus those in excludes.
