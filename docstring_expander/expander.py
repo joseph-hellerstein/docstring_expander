@@ -39,7 +39,9 @@ class Expander(object):
         break
     # Construct the expansion
     expansion = ""
-    for idx, keyword in enumerate(self.keywords):
+    keywords = list(self.keywords)
+    keywords.sort()
+    for idx, keyword in enumerate(keywords):
       self.kwarg_dct[keyword].setIndent(self._indent)
       expansion += str(self.kwarg_dct[keyword])
     # Replace the docstring

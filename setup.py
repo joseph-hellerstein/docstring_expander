@@ -1,17 +1,20 @@
 from setuptools import setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 INSTALL_REQUIRES = [
     ]
 
 def doSetup(install_requires):
   setup(
       name='docstring_expander',
-      version='0.1',
+      version='0.2',
       author='Joseph L. Hellerstein',
       author_email='jlheller@uw.edu',
       url='https://github.com/joseph-hellerstein/docstring_expander.git',
       description='Enables intellisense for **kwargs',
-      long_description=open('README.md').read(),
+      long_description=long_description,
       long_description_content_type='text/markdown',
       packages=['docstring_expander'],
       package_dir={'docstring_expander':

@@ -12,15 +12,23 @@ import copy
 import unittest
 
 
-IGNORE_TEST = True
+IGNORE_TEST = False
 KWARGS = [
     Kwarg("num_col", default=3, doc="number of columns", dtype=int),
     Kwarg("num_row", default=3, doc="number of rows"),
     Kwarg("num_plot", doc="number of plots", dtype=int),
     Kwarg("plot_title", doc="Title of the plot", dtype=str),
+    Kwarg("title_font", doc="Font size for plot", dtype=float),
     Kwarg("dummy"),
     ]
-BASE = ["num_col", "num_row", "plot_title"]
+BASE = ["num_row", "num_col", "title_font", "plot_title"]
+DOCSTRING = """
+  This is a test function.
+  
+  Parameters
+  ----------
+  #@expand
+  """
     
 
 def func(arg, **kwargs):
@@ -50,6 +58,7 @@ class TestExpander(unittest.TestCase):
   def setUp(self):
     self.expander = Expander(KWARGS, BASE)
     self.func = copy.deepcopy(func)
+    self.func.__doc__ = DOCSTRING
 
   def testConstructor(self):
     if IGNORE_TEST:
