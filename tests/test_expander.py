@@ -21,6 +21,14 @@ KWARGS = [
     Kwarg("title_font", doc="Font size for plot", dtype=float),
     Kwarg("dummy"),
     ]
+HEADER = """
+Header line 1
+Header line 2
+"""
+TRAILER = """
+Trailer line 1
+Trailer line 2
+"""
 BASE = ["num_row", "num_col", "title_font", "plot_title"]
 DOCSTRING = """
   This is a test function.
@@ -72,6 +80,20 @@ class TestExpander(unittest.TestCase):
     new_func = self.expander.__call__(self.func)
     for key in BASE:
       self.assertTrue(key in new_func.__doc__)
+
+  def testCallHeader(self):
+    if IGNORE_TEST:
+      return
+    expander = Expander(KWARGS, BASE, header=HEADER)
+    new_func = expander.__call__(self.func)
+    self.assertTrue("Header" in new_func.__doc__)
+
+  def testCallTrailer(self):
+    if IGNORE_TEST:
+      return
+    expander = Expander(KWARGS, BASE, trailer=TRAILER)
+    new_func = expander.__call__(self.func)
+    self.assertTrue("Trailer" in new_func.__doc__)
 
   def testDecorator(self):
     if IGNORE_TEST:

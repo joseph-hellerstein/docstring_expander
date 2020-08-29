@@ -21,7 +21,7 @@ class Kwarg(object):
     self.default = default  # Default value of keyword
     self.doc = doc  # String to describe keyword
     self.dtype = dtype  # Data type
-    self._indent = None
+    self._indent = 0
 
   def setIndent(self, indent):
     self._indent = indent
