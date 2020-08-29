@@ -9,7 +9,7 @@ INSTALL_REQUIRES = [
 def doSetup(install_requires):
   setup(
       name='docstring_expander',
-      version='0.21',
+      version='0.23',
       author='Joseph L. Hellerstein',
       author_email='jlheller@uw.edu',
       url='https://github.com/joseph-hellerstein/docstring_expander.git',
